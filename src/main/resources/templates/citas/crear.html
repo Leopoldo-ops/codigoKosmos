@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Crear Cita</title>
+</head>
+<body>
+    <h1>Crear Cita</h1>
+    <form th:action="@{/citas/crear}" th:object="${cita}" method="post">
+        <label for="doctor">Doctor:</label>
+        <select th:field="*{doctor.id}">
+            <option th:each="doctor : ${doctores}" th:value="${doctor.id}" th:text="${doctor.nombre} + ' ' + ${doctor.apellidoPaterno}"></option>
+        </select><br/>
+
+        <label for="consultorio">Consultorio:</label>
+        <select th:field="*{consultorio.id}">
+            <option th:each="consultorio : ${consultorios}" th:value="${consultorio.id}" th:text="${consultorio.numero}"></option>
+        </select><br/>
+
+        <label for="paciente">Nombre del Paciente:</label>
+        <input type="text" th:field="*{paciente.nombre}"/><br/>
+
+        <label for="fechaHora">Fecha y Hora:</label>
+        <input type="datetime-local" th:field="*{fechaHora}"/><br/>
+
+        <button type="submit">Crear Cita</button>
+    </form>
+    <p th:if="${error}" th:text="${error}" style="color: red;"></p>
+    <a th:href="@{/}">Volver al inicio</a>
+</body>
+</html>
